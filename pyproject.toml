@@ -9,6 +9,6 @@ Repository = "https://github.com/tmagara/ComfyUI-Prediction-Boost"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "tmagara"
 DisplayName = "ComfyUI-Prediction-Boost"
 Icon = ""
