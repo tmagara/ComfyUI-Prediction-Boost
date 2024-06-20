@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-prediction-boost"
+description = "prediction boost custom node for ComfyUI"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/tmagara/ComfyUI-Prediction-Boost"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Prediction-Boost"
+Icon = ""
