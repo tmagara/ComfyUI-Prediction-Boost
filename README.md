@@ -4,6 +4,7 @@ This is a custom node for ComfyUI.
 
 # Method
 We use xₜ⊥Ɛ̃(the vector component of xₜ perpendicular to Ɛ̃) to boost up the image part of xₜ by this:
+
 Ɛ̃ ← Ɛ̃ - boost_scale * (xₜ⊥Ɛ̃)
 
 
