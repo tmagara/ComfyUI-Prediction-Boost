@@ -19,6 +19,7 @@ class PredictionBoost:
         return {
             "required": {
                 "model": ("MODEL",),
+                "version": (["24.03", "24.05", "24.07"], ),
                 "boost_scale": ("FLOAT", {"default": 0.0, "min": -1.0, "max": 1.0, "step": 0.01}),
             },
         }
@@ -27,8 +28,7 @@ class PredictionBoost:
     FUNCTION = "execute"
     CATEGORY = "advanced/model"
 
-    def execute(self, model, boost_scale):
-        do_normalize = "enable"
+    def execute(self, model, boost_scale, version="24.05"):
         def sampler_post_cfg_function(args):
             sigma = args["sigma"]
             input = args["input"]
@@ -37,13 +37,20 @@ class PredictionBoost:
 
             noise_pred = (input - denoised) / sigma
             noise_pred_cond = (input - cond_denoised) / sigma
-            boost_denoised = _rejection(input, noise_pred_cond)
-            if do_normalize == "enable":
+            if version == "off":
+                boost_denoised = 0
+            elif version == "24.03":
+                boost_denoised = _rejection(input, noise_pred)
+            elif version == "24.05":
+                boost_denoised = _rejection(input, noise_pred_cond)
                 boost_denoised = _normalize(boost_denoised, noise_pred) * sigma
+            elif version == "24.07":
+                boost_denoised = _rejection(input, noise_pred)
+                boost_denoised = _normalize(boost_denoised, noise_pred) * sigma
+
             return denoised + boost_scale * boost_denoised
 
         m = model.clone()
         m.set_model_sampler_post_cfg_function(sampler_post_cfg_function)
         return (m, )
-
 
