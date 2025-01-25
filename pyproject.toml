@@ -2,7 +2,7 @@
 name = "comfyui-prediction-boost"
 description = "prediction boost custom node for ComfyUI"
 version = "1.0.0"
-license = "LICENSE"
+license = { file = "LICENSE" }
 
 [project.urls]
 Repository = "https://github.com/tmagara/ComfyUI-Prediction-Boost"
